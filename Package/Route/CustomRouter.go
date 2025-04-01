@@ -9,7 +9,7 @@ import (
 
 func CustomRouter(Router *mux.Router) {
 
-	Router.HandleFunc(RouterURL.GetServerList, Controller.ReturnExistingChunkList).Methods("GET")
+	Router.HandleFunc(RouterURL.GetServerList, Controller.ReturnChunkList).Methods("GET")
 	Router.HandleFunc(RouterURL.GetChunkList, Controller.ReturnAvailableChunkList).Methods("GET")
 
 }
