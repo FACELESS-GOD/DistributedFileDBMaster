@@ -14,13 +14,19 @@ func main() {
 
 	Utility.InitiateSocketConnection()
 
-	Utility.InitiateBroadCast()
+	Utility.InitiateGRPCConnection()
+
+	go Utility.InitiateBroadCast()
+
+	go Utility.AcceptingIncommingRequest()
 
 	MuxRouter := mux.NewRouter()
 
 	Route.CustomRouter(MuxRouter)
 
 	http.Handle("/", MuxRouter)
+
+	go Utility.InitiateBroadCast()
 
 	http.ListenAndServe("localhost:9040", MuxRouter)
 }

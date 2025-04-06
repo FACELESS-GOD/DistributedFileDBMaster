@@ -14,7 +14,7 @@ type GenericResponseData struct {
 }
 
 type ChunkListResponse struct {
-	ChunkList map[string]int
+	ChunkList map[string]int64
 }
 
 type SaveFileRequest struct {
@@ -29,4 +29,10 @@ type GetFileRequest struct {
 
 type ChunkIDResponse struct {
 	ChunkList []string
+}
+
+type ChunkMapping struct {
+	ServerID       string
+	AvailableSpace int64
+	ChunkList      []string
 }

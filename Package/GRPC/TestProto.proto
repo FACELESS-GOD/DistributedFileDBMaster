@@ -1,0 +1,13 @@
+syntax = "proto3";
+package GRPCHandler;
+option go_package = "./GRPCHandler";
+
+message RecievedMessage {
+  string ServerID = 1;
+  string AvailableSize = 2;
+  string chunkList = 3;
+}
+
+service MessageExchangeService {
+  rpc MessageProcessor(RecievedMessage) returns (RecievedMessage) {}
+}

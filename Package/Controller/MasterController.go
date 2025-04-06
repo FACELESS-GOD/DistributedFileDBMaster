@@ -12,7 +12,7 @@ func ReturnAvailableChunkList(writer http.ResponseWriter, Req *http.Request) {
 	ResponseInstance := Structstore.ChunkListResponse{}
 
 	Utility.ParseBody(Req, RequestInstance)
-	var chunkList map[string]int
+	var chunkList map[string]int64
 
 	var fileSize int64 = RequestInstance.Size
 	var serverList []string
