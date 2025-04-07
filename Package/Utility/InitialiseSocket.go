@@ -1,6 +1,7 @@
 package Utility
 
 import (
+	"DistributedFileDBMaster/Helper"
 	Structstore "DistributedFileDBMaster/Helper/StructStore"
 	"bufio"
 	"bytes"
@@ -64,22 +65,22 @@ func MessageController(conn net.Conn) {
 }
 func ProcessChunkData(ChunkData Structstore.ChunkMapping) {
 
-	AvailableChunk[ChunkData.ServerID] = ChunkData.AvailableSpace
+	Helper.AvailableChunk[ChunkData.ServerID] = ChunkData.AvailableSpace
 
 	for _, ChunkName := range ChunkData.ChunkList {
 
-		_, IsPresent := ChunkMapping[ChunkName]
+		_, IsPresent := Helper.ChunkMapping[ChunkName]
 
 		if IsPresent == true {
-			ServerList, _ := ChunkMapping[ChunkName]
+			ServerList, _ := Helper.ChunkMapping[ChunkName]
 			if slices.Contains(ServerList, ChunkData.ServerID) != true {
 				ServerList = append(ServerList, ChunkData.ServerID)
-				ChunkMapping[ChunkName] = ServerList
+				Helper.ChunkMapping[ChunkName] = ServerList
 			}
 		} else {
 			var ServerList []string
 			ServerList = append(ServerList, ChunkData.ServerID)
-			ChunkMapping[ChunkName] = ServerList
+			Helper.ChunkMapping[ChunkName] = ServerList
 		}
 
 	}

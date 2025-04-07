@@ -1,6 +1,7 @@
 package Controller
 
 import (
+	"DistributedFileDBMaster/Helper"
 	Structstore "DistributedFileDBMaster/Helper/StructStore"
 	"DistributedFileDBMaster/Package/Utility"
 	"encoding/json"
@@ -17,7 +18,7 @@ func ReturnAvailableChunkList(writer http.ResponseWriter, Req *http.Request) {
 	var fileSize int64 = RequestInstance.Size
 	var serverList []string
 
-	for key, value := range Utility.AvailableChunk {
+	for key, value := range Helper.AvailableChunk {
 		if fileSize > 0 {
 			if value > 0 {
 
@@ -37,7 +38,7 @@ func ReturnAvailableChunkList(writer http.ResponseWriter, Req *http.Request) {
 
 	}
 
-	Utility.ChunkMapping[RequestInstance.FileName] = serverList
+	Helper.ChunkMapping[RequestInstance.FileName] = serverList
 
 	ResponseInstance.ChunkList = chunkList
 	res, _ := json.Marshal(ResponseInstance)
@@ -56,7 +57,7 @@ func ReturnChunkList(writer http.ResponseWriter, Req *http.Request) {
 
 	fileName := RequestInstance.FileName
 
-	ChunkIDList, ok := Utility.ChunkMapping[fileName]
+	ChunkIDList, ok := Helper.ChunkMapping[fileName]
 
 	if ok == true {
 		ResponseInstance.ChunkList = ChunkIDList

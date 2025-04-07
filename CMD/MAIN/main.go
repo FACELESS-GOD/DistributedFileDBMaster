@@ -1,6 +1,8 @@
 package main
 
 import (
+	"DistributedFileDBMaster/Helper"
+	GRPCHandler "DistributedFileDBMaster/Package/GRPC"
 	"DistributedFileDBMaster/Package/Route"
 	"DistributedFileDBMaster/Package/Utility"
 	"net/http"
@@ -10,15 +12,15 @@ import (
 
 func main() {
 
-	Utility.InitializeMetaData()
+	Helper.InitializeMetaData()
 
-	Utility.InitiateSocketConnection()
+	//Utility.InitiateSocketConnection()
 
-	Utility.InitiateGRPCConnection()
+	go GRPCHandler.InitiateGRPCConnection()
 
-	go Utility.InitiateBroadCast()
+	//go Utility.InitiateBroadCast()
 
-	go Utility.AcceptingIncommingRequest()
+	//go Utility.AcceptingIncommingRequest()
 
 	MuxRouter := mux.NewRouter()
 

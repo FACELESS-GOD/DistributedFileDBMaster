@@ -1,7 +1,7 @@
-package Utility
+package GRPCHandler
 
 import (
-	GRPCHandler "DistributedFileDBMaster/Package/GRPC"
+	
 	"fmt"
 	"net"
 
@@ -17,9 +17,9 @@ func InitiateGRPCConnection() {
 
 	GRPCServer := grpc.NewServer()
 
-	server := GRPCHandler.ServerStruct{}
+	server :=  ServerStruct{}
 
-	GRPCHandler.RegisterMessageExchangeServiceServer(GRPCServer, &server)
+	RegisterMessageExchangeServiceServer(GRPCServer, &server)
 
 	err = GRPCServer.Serve(ListenConnectionInstance)
 

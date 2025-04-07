@@ -1,4 +1,4 @@
-package Utility
+package Helper
 
 var ChunkMapping map[string][]string
 
